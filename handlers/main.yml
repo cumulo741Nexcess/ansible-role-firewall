@@ -1,0 +1,10 @@
+---
+
+- name: stop firewall
+  command: /usr/libexec/iptables/iptables.init stop
+
+- name: start firewall
+  command: /etc/iptables.v4.generated && /usr/libexec/iptables/iptables.init save
+
+- name: restart firewall
+  command: /etc/iptables.v4.generated && /usr/libexec/iptables/iptables.init save
