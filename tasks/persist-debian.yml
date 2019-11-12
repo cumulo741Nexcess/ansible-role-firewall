@@ -12,14 +12,14 @@
 - name: Check if netfilter-persistent is present
   shell: which netfilter-persistent
   register: is_netfilter
-  when: v4_script|changed or v6_script|changed
+  when: v4_script is changed or v6_script is changed
   changed_when: false
   ignore_errors: yes
 
 - name: Save rules (netfilter-persistent)
   command: netfilter-persistent save
-  when: (v4_script|changed or v6_script|changed) and is_netfilter.rc == 0
+  when: (v4_script is changed or v6_script is changed) and is_netfilter.rc == 0
 
 - name: Save rules (iptables-persistent)
   command: /etc/init.d/iptables-persistent save
-  when: (v4_script|changed or v6_script|changed) and is_netfilter.rc == 1
+  when: (v4_script is changed or v6_script is changed) and is_netfilter.rc == 1
